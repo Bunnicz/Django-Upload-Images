@@ -1,5 +1,3 @@
-# from django.conf import settings
-# from django.contrib.auth.models import Group
 from rest_framework import permissions, viewsets
 
 from .models import CustomUser, UserTier
@@ -24,13 +22,3 @@ class UserTierViewSet(viewsets.ModelViewSet):
     queryset = UserTier.objects.all().order_by("name")
     serializer_class = UserTierSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-
-# class GroupViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows groups to be viewed or edited.
-#     """
-
-#     queryset = Group.objects.all()
-#     serializer_class = UserTierSerializer
-#     permission_classes = [permissions.IsAuthenticated]

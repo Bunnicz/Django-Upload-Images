@@ -114,7 +114,9 @@ class TestCustomUserModel:
         assert str(user_with_tier) == "user_with_tier-test_tier"
 
     @mark.django_db
-    def test_create_batch_custom_user_without_tier(self, custom_user_factory: CustomUser):
+    def test_create_batch_custom_user_without_tier(
+        self, custom_user_factory: CustomUser
+    ):
         custom_user_factory.create_batch(20)
         count = CustomUser.objects.all().count()
         assert count == 20

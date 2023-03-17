@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils import timezone  # time-zone aware datetime
+from django.utils import timezone
 from imagekit import ImageSpec
 from imagekit.admin import AdminThumbnail
 from imagekit.cachefiles import ImageCacheFile

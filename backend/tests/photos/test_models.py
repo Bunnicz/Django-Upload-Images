@@ -1,10 +1,7 @@
 from factory.django import ImageField
 from pytest import mark
 
-# from django.utils.crypto import get_random_string
 from photos.models import Image, TempUrl
-
-# pytestmark = pytest.mark.django_db
 
 
 class TestImageModel:

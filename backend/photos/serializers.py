@@ -1,4 +1,4 @@
-from django.utils import timezone  # time-zone aware datetime
+from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.reverse import reverse
 
@@ -39,7 +39,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
         data["user"] = request.user
         image = data.get("image")
-        delete_url_time = data.get("delete_url_time")  # ,0)
+        delete_url_time = data.get("delete_url_time")
         validate_image(image)
         validate_url_expiration_time(request.user, delete_url_time)
         return data

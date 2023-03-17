@@ -2,7 +2,7 @@ import os
 
 from django.conf import settings
 from django.http import FileResponse, HttpRequest
-from django.utils import timezone  # time-zone aware datetime
+from django.utils import timezone
 from rest_framework import generics, mixins, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -27,7 +27,9 @@ class ImageAPIView(
         """
         user = self.request.user
         return (
-            Image.objects.select_related("user").filter(user=user).order_by("-timestamp")
+            Image.objects.select_related("user")
+            .filter(user=user)
+            .order_by("-timestamp")
         )
 
     def get(self, request: HttpRequest, *args, **kwargs):

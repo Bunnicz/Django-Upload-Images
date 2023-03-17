@@ -1,4 +1,4 @@
-from django.utils import timezone  # time-zone aware datetime
+from django.utils import timezone
 from factory import Faker, LazyFunction, RelatedFactory, Sequence, SubFactory, Trait
 from factory.django import DjangoModelFactory, ImageField
 
@@ -31,12 +31,6 @@ class CustomUserFactory(DjangoModelFactory):
     class Params:
         with_tier = Trait(tier=SubFactory(UserTierFactory))
 
-    # @classmethod
-    # def _create(cls, model_class: CustomUser, *args, **kwargs):
-    #     """Override the default ``_create``."""
-    #     manager = cls._get_manager(model_class)
-    #     return manager.create_user(*args, **kwargs)
-
 
 # ______PHOTOS APP______:
 class ImageFactory(DjangoModelFactory):
@@ -44,7 +38,7 @@ class ImageFactory(DjangoModelFactory):
         model = Image
 
     id = Faker("uuid4")
-    image = ImageField()  # factory.Faker("image")
+    image = ImageField()
     user = SubFactory(CustomUserFactory)
     timestamp = LazyFunction(timezone.now)
     delete_url_time = None

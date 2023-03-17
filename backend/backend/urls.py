@@ -12,6 +12,3 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# http://127.0.0.1:8000/api-auth/login/
-# http://127.0.0.1:8000/api-auth/logout/

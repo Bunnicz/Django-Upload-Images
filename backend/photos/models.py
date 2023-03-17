@@ -22,7 +22,9 @@ class Image(models.Model):
         f_hash = str(uuid.uuid4()).replace("-", "")
         assert len(f_hash) % 2 == 0
         return "{}{}{}".format(
-            os.sep.join(x + y for x, y in zip(f_hash[::2], f_hash[1::2])), os.sep, filename
+            os.sep.join(x + y for x, y in zip(f_hash[::2], f_hash[1::2])),
+            os.sep,
+            filename,
         )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

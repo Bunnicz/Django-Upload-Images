@@ -22,16 +22,6 @@ def api_client() -> APIClient:
     return APIClient
 
 
-# @pytest.fixture
-# def auto_login_user(db, api_client, custom_user_factory):
-#     api_client = api_client
-#     api_client.force_authenticate(self, user=custom_user_factory)
-#     return api_client
-
-
-# pytestmark = pytest.mark.django_db
-
-
 @fixture
 def create_standard_tiers(user_tier_factory) -> list:
     tier_enterprise = user_tier_factory.build(
