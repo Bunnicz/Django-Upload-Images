@@ -1,0 +1,19 @@
+version: "3.11"
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/backend
+    ports:
+      - 8000:8000
+    env_file: .env
+    environment:
+      - UWSGI_PY_AUTORELOAD=1
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: on-failure
