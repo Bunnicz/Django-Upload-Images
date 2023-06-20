@@ -1,5 +1,6 @@
 from django.utils import timezone
-from factory import Faker, LazyFunction, RelatedFactory, Sequence, SubFactory, Trait
+from factory import (Faker, LazyFunction, RelatedFactory, Sequence, SubFactory,
+                     Trait)
 from factory.django import DjangoModelFactory, ImageField
 
 from accounts.models import CustomUser, UserTier

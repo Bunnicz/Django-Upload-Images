@@ -1,8 +1,10 @@
 from factory.django import ImageField
-from pytest import fixture
+from pytest import fixture, mark
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
 
+from accounts.models import CustomUser, UserTier
+from photos.models import Image
 from tests.factories import (
     CustomUserFactory,
     ImageFactory,
@@ -23,7 +25,7 @@ def api_client() -> APIClient:
 
 
 @fixture
-def create_standard_tiers(user_tier_factory) -> list:
+def create_standard_tiers(user_tier_factory: callable) -> list[UserTier]:
     tier_enterprise = user_tier_factory.build(
         id="5244822e-0a70-441e-a33f-d03b5de892ef",
         name="Enterprise",
@@ -61,7 +63,7 @@ def create_standard_tiers(user_tier_factory) -> list:
 
 
 @fixture
-def test_image_jpeg(image_factory):
+def test_image_jpeg(image_factory: callable) -> Image:
     return image_factory.build(
         id="5223822e-0a70-441e-a33f-d03b5de892ef",
         image=ImageField(filename="test_image", format="JPEG"),
@@ -69,7 +71,7 @@ def test_image_jpeg(image_factory):
 
 
 @fixture
-def test_image_gif(image_factory):
+def test_image_gif(image_factory: callable) -> Image:
     return image_factory.build(
         id="5223822e-0a70-441e-a33f-d03b5de892ef",
         image=ImageField(filename="test_image", format="GIF"),
@@ -77,8 +79,26 @@ def test_image_gif(image_factory):
 
 
 @fixture
-def test_image_png(image_factory):
+def test_image_png(image_factory: callable) -> Image:
     return image_factory.build(
         id="5223822e-0a70-441e-a33f-d03b5de892ef",
         image=ImageField(filename="test_image", format="PNG"),
     )
+
+
+@fixture
+@mark.django_db
+def authenticated_user_enterprise(
+    api_client: APIClient,
+    custom_user_factory: callable,
+    create_standard_tiers: list[UserTier],
+) -> CustomUser:
+    user = custom_user_factory.build(
+        id="5223822e-0a70-441e-a33f-d03b5de892ef",
+        username="APIUser",
+        password="APIuserPass123",
+        tier=create_standard_tiers[0],
+    )
+    client = api_client
+    client.force_authenticate(user=user)
+    return user
